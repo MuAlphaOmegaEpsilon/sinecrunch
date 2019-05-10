@@ -1,0 +1,14 @@
+# Ignore both root files and root directories...
+/*
+
+# ...except these folders (and eventually their content) down here...
+!/benchmark
+!/.git
+
+# ...and except these files down here...
+!/buildmode.hpp
+!/CMakeLists.txt
+!/LICENSE
+!/README.md
+!/.gitignore
+!/.travis.yml
