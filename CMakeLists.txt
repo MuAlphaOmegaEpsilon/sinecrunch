@@ -20,11 +20,12 @@ PROJECT (sinecrunch
 ###############################################################################
 #                       GOOGLE BENCMHMARK VAR OVERRIDES                       #
 ###############################################################################
+SET (BENCHMARK_DOWNLOAD_DEPENDENCIES ON CACHE BOOL "Enable dependencies download" FORCE)
+SET (BENCHMARK_ENABLE_GTEST_TESTS OFF CACHE BOOL "Disabling Google Benchmark's GTest tests" FORCE)
 SET (BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Suppressing Google Benchmark's tests" FORCE)
 SET (BENCHMARK_ENABLE_EXCEPTIONS OFF CACHE BOOL "Suppressing Google Benchmark's exceptions" FORCE)
-SET (BENCHMARK_ENABLE_LTO ON CACHE BOOL "Enabling Google Benchmark's LTO feature" FORCE)
-SET (BENCHMARK_ENABLE_GTEST_TESTS OFF CACHE BOOL "Disabling Google Benchmark's GTest tests" FORCE)
-	
+SET (BENCHMARK_ENABLE_INSTALL OFF CACHE BOOL "Disabling Google Benchmark's installation" FORCE)
+
 
 
 
