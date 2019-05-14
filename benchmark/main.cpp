@@ -60,13 +60,13 @@ void initialize ()
     std::transform (RANGE (anglesQP), groundTruth, sinl);
 }
 
-template <typename T>
+template <typename T> constexpr
 floatDP error_abs (const T& value, const floatQP& groundTruth) noexcept
 {
     return (floatDP) abs ((value - (T) groundTruth));
 }
 
-template <typename T>
+template <typename T> constexpr
 floatDP error_rel (const T& value, const floatQP& groundTruth) noexcept
 {
     return (floatDP) abs (value / (T) groundTruth - (T) 1.0L);
