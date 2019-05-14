@@ -52,6 +52,15 @@ SET_TARGET_PROPERTIES (sinecrunch PROPERTIES
 #                                  HEADERS                                    #
 ###############################################################################
 TARGET_INCLUDE_DIRECTORIES (sinecrunch PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/libs/benchmark/include)
+TARGET_INCLUDE_DIRECTORIES (sinecrunch PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/libs/FastTrigo)
+
+
+
+
+###############################################################################
+#                                  SOURCES                                    #
+###############################################################################
+TARGET_SOURCES (sinecrunch PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/libs/FastTrigo/fasttrigo.cpp)
 
 
 

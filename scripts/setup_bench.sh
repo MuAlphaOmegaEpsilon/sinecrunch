@@ -7,10 +7,10 @@ cd "$(dirname "${BASH_SOURCE[0]}")/.."
 ORANGE='\033[0;33m'
 RC='\033[0m' # Remove color
 
-echo -e "${ORANGE}Downloading Google Benchmark submodule$RC"
+echo -e "${ORANGE}Downloading submodules$RC"
 git submodule update --init --recursive
 
-echo -e "${ORANGE}Running CMake$RC"
+echo -e "\n${ORANGE}Running CMake$RC"
 if [ -d build ]; then 
 		rm -r build 
 fi
@@ -19,4 +19,4 @@ cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 cd ../scripts
 ./build_bench.sh
-echo -e "${ORANGE}Setup done$RC"
+echo -e "\n${ORANGE}Setup done$RC"
