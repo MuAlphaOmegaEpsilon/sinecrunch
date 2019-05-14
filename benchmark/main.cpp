@@ -14,7 +14,7 @@ using floatQP = long double;
 constexpr uint32_t samplesNum = (1 << 15) + 1;
 
 // The amount of space there is between two consecutive samples.
-constexpr floatSP samplePeriod = M_PI * 2.0f / (samplesNum - 1);
+constexpr floatDP samplePeriod = (floatSP) (M_PI * 2.0f / (samplesNum - 1));
 
 // Since the purpose of the benchmark is about measuring sinusoid function 
 // calls performance, we don't want to deal with angle conversions at 
@@ -90,15 +90,15 @@ static void benchSinusoid (benchmark::State& state)
 
     // Absolute errors calculations
     std::transform (RANGE (result), groundTruth, errors, error_abs <T>);
-    state.counters["err_abs_avg"] = std::accumulate (RANGE (errors), (T) 0.0L) * (floatDP) samplePeriod;
-    state.counters["err_abs_max"] = *std::max_element (RANGE (errors));
-    state.counters["err_abs_min"] = *std::min_element (RANGE (errors));
+    state.counters["AErr_avg"] = std::accumulate (RANGE (errors), 0.0L) * samplePeriod;
+    state.counters["AErr_max"] = *std::max_element (RANGE (errors));
+    state.counters["AErr_min"] = *std::min_element (RANGE (errors));
 
     // Relative errors calculations
     std::transform (RANGE (result), groundTruth, errors, error_rel <T>);
-    state.counters["err_rel_avg"] = std::accumulate (RANGE (errors), (T) 0.0L) * (floatDP) samplePeriod;
-    state.counters["err_rel_max"] = *std::max_element (RANGE (errors));
-    state.counters["err_rel_min"] = *std::min_element (RANGE (errors));
+    state.counters["RE_avg"] = std::accumulate (RANGE (errors), 0.0L) * samplePeriod;
+    state.counters["RE_max"] = *std::max_element (RANGE (errors));
+    state.counters["RE_min"] = *std::min_element (RANGE (errors));
 }
 
 // A little shorthand to mark a function for benchmarking and to rename it.
