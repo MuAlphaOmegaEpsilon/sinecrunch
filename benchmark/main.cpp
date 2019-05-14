@@ -117,6 +117,11 @@ BENCH_SINUSOID (floatDP, sin, compiler);
 BENCH_SINUSOID (floatSP, std::sin, std);
 BENCH_SINUSOID (floatSP, sinf, compiler);
 
+// Register FastTrigo functions to benchmark.
+#include <fasttrigo.h>
+BENCH_SINUSOID (floatSP, FT::sin, fasttrigo_fast);
+BENCH_SINUSOID (floatSP, FTA::sin, fasttrigo_precise);
+
 int main(int argc, char** argv) 
 {
     benchmark::Initialize (&argc, argv);
