@@ -109,14 +109,13 @@ static void benchSinusoid (benchmark::State& state)
 const auto SIN_ ## type ## _ ## name = benchSinusoid <type, function>;  \
 BENCHMARK (SIN_ ## type ## _ ## name);
 
-// Register all the functions to benchmark.
+// Register all the standard functions to benchmark.
 BENCH_SINUSOID (floatQP, std::sin, std);
 BENCH_SINUSOID (floatQP, sinl, compiler);
 BENCH_SINUSOID (floatDP, std::sin, std);
 BENCH_SINUSOID (floatDP, sin, compiler);
 BENCH_SINUSOID (floatSP, std::sin, std);
-BENCH_SINUSOID (floatSP, sin, compiler);
-BENCH_SINUSOID (floatSP, sinf, compiler_f);
+BENCH_SINUSOID (floatSP, sinf, compiler);
 
 int main(int argc, char** argv) 
 {
