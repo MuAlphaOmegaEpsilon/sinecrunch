@@ -78,15 +78,22 @@ static void benchSinusoid (benchmark::State& state)
     const T* angles = getAngles <T> ();
     T result [samplesNum];
     floatDP errors [samplesNum];
+
+    double random = fmod (rand () / 1000.0, 2.0 * M_PI);
     
     // Main funciton benchmark loop: this is where the execution of the 
     // function is actually measured.
     for (const auto _ : state) 
-        std::transform (RANGE (angles), result, sinusoid);
+        benchmark::DoNotOptimize (result[0] = sinusoid (random));
+    
+    std::transform (RANGE (angles), result, sinusoid);
 
     // Total number of items processed. 
     // Google Benchmark will calculate how many items_per_second based on this.
-    state.SetItemsProcessed (state.iterations () * samplesNum);
+    state.SetItemsProcessed (state.iterations ());
+    state.SetBytesProcessed (state.iterations () * sizeof (T));
+
+    state.counters["angle"] = random;
 
     // Absolute errors calculations
     std::transform (RANGE (result), groundTruth, errors, error_abs <T>);
@@ -121,6 +128,10 @@ BENCH_SINUSOID (floatSP, sinf, compiler);
 #include <fasttrigo.h>
 BENCH_SINUSOID (floatSP, FT::sin, fasttrigo_fast);
 BENCH_SINUSOID (floatSP, FTA::sin, fasttrigo_precise);
+
+// Register sinecrunch functions to benchmark.
+#include <sinecrunch.h>
+//BENCH_SINUSOID (floatSP, sinecrunch::sin, sinecrunch);
 
 int main(int argc, char** argv) 
 {

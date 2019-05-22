@@ -1,6 +1,6 @@
-[submodule "libs/benchmark"]
-	path = libs/benchmark
-	url = https://github.com/google/benchmark
-[submodule "libs/FastTrigo"]
-	path = libs/FastTrigo
-	url = https://github.com/divideconcept/FastTrigo
+[submodule "benchmark/libs/benchmark"]
+	path = benchmark/libs/benchmark
+	url = https://github.com/google/benchmark.git
+[submodule "benchmark/libs/FastTrigo"]
+	path = benchmark/libs/FastTrigo
+	url = https://github.com/MuAlphaOmegaEpsilon/FastTrigo/

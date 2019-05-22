@@ -3,8 +3,6 @@
 
 # ...except these folders (and eventually their content) down here...
 !/benchmark
-!/libs
-!/scripts
 !/.git
 
 # ...and except these files down here...

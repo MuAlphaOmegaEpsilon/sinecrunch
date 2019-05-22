@@ -1,16 +1,17 @@
-#!/usr/bin/env bash
-set -euo pipefail
-# Navigate to the project root folder
-cd "$(dirname "${BASH_SOURCE[0]}")/.." 
+#!/bin/sh
+set -euf
+
+# Navigate to the benchmark folder
+cd "$(dirname "$0")"
 
 ### COLORING SCHEME ###
-ORANGE='\033[0;33m'
-RC='\033[0m' # Remove color
+ORANGE=$(tput setaf 3)
+NOCOLOR=$(tput sgr0)
 
-if [ -d build ]; then 
-	cd build
-	echo -e "${ORANGE}Building$RC"
-	cmake --build . --parallel $(nproc)
+if [ -d bin ]; then 
+	cd bin
+	printf "\\n%sBUILDING BINARY%s\\n" "${ORANGE}" "${NOCOLOR}"
+	cmake --build . --parallel "$(nproc)"
 else
-	echo -e "${ORANGE}No build folder found, aborting$RC"
+	printf "\\n%sNo build folder found, aborting%s\\n" "${ORANGE}" "${NOCOLOR}"
 fi
