@@ -130,8 +130,8 @@ BENCH_SINUSOID (floatSP, FT::sin, fasttrigo_fast);
 BENCH_SINUSOID (floatSP, FTA::sin, fasttrigo_precise);
 
 // Register sinecrunch functions to benchmark.
-#include <sinecrunch.h>
-//BENCH_SINUSOID (floatSP, sinecrunch::sin, sinecrunch);
+#include <sinecrunch.hpp>
+BENCH_SINUSOID (floatSP, sinecrunch::sin<1>, sinecrunch);
 
 int main(int argc, char** argv) 
 {
