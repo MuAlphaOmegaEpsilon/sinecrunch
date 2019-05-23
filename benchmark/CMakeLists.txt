@@ -32,6 +32,7 @@ SET (BENCHMARK_ENABLE_INSTALL OFF CACHE BOOL "Disabling Google Benchmark's insta
 ###############################################################################
 #                             CMAKE DEPENDENCIES                              #
 ###############################################################################
+ADD_SUBDIRECTORY (${CMAKE_CURRENT_SOURCE_DIR}/.. ${CMAKE_CURRENT_BINARY_DIR}/sinecrunch)
 ADD_SUBDIRECTORY (libs/benchmark)
 
 
@@ -66,4 +67,5 @@ TARGET_SOURCES (BM_sinecrunch PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/libs/FastTrigo
 ###############################################################################
 #                                  LINKING                                    #
 ###############################################################################
+TARGET_LINK_LIBRARIES (BM_sinecrunch sinecrunch)
 TARGET_LINK_LIBRARIES (BM_sinecrunch benchmark)
