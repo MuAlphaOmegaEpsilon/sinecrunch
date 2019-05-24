@@ -11,7 +11,7 @@ NOCOLOR=$(tput sgr0)
 if [ -d bin ]; then 
 	cd bin
 	printf "\\n%sBUILDING BINARY%s\\n" "${ORANGE}" "${NOCOLOR}"
-	cmake --build . --parallel "$(nproc)"
+	cmake --build --parallel .
 else
 	printf "\\n%sNo build folder found, aborting%s\\n" "${ORANGE}" "${NOCOLOR}"
 fi
