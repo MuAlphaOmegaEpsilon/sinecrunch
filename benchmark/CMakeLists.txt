@@ -32,7 +32,7 @@ SET (BENCHMARK_ENABLE_INSTALL OFF CACHE BOOL "Disabling Google Benchmark's insta
 ###############################################################################
 #                             CMAKE DEPENDENCIES                              #
 ###############################################################################
-ADD_SUBDIRECTORY (${CMAKE_CURRENT_SOURCE_DIR}/.. ${CMAKE_CURRENT_BINARY_DIR}/sinecrunch)
+ADD_SUBDIRECTORY (${CMAKE_CURRENT_LIST_DIR}/.. ${CMAKE_CURRENT_LIST_DIR}/sinecrunch)
 ADD_SUBDIRECTORY (libs/benchmark)
 
 
@@ -50,8 +50,8 @@ SET_TARGET_PROPERTIES (BM_sinecrunch PROPERTIES CXX_STANDARD 11 CXX_EXTENSIONS O
 ###############################################################################
 #                                  HEADERS                                    #
 ###############################################################################
-TARGET_INCLUDE_DIRECTORIES (BM_sinecrunch PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/libs/benchmark/include)
-TARGET_INCLUDE_DIRECTORIES (BM_sinecrunch PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/libs/FastTrigo)
+TARGET_INCLUDE_DIRECTORIES (BM_sinecrunch PRIVATE ${CMAKE_CURRENT_LIST_DIR}/libs/benchmark/include)
+TARGET_INCLUDE_DIRECTORIES (BM_sinecrunch PRIVATE ${CMAKE_CURRENT_LIST_DIR}/libs/FastTrigo)
 
 
 
@@ -59,7 +59,7 @@ TARGET_INCLUDE_DIRECTORIES (BM_sinecrunch PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/li
 ###############################################################################
 #                                  SOURCES                                    #
 ###############################################################################
-TARGET_SOURCES (BM_sinecrunch PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/libs/FastTrigo/fasttrigo.cpp)
+TARGET_SOURCES (BM_sinecrunch PRIVATE ${CMAKE_CURRENT_LIST_DIR}/libs/FastTrigo/fasttrigo.cpp)
 
 
 
@@ -69,3 +69,15 @@ TARGET_SOURCES (BM_sinecrunch PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/libs/FastTrigo
 ###############################################################################
 TARGET_LINK_LIBRARIES (BM_sinecrunch sinecrunch)
 TARGET_LINK_LIBRARIES (BM_sinecrunch benchmark)
+
+
+
+
+###############################################################################
+#                                   FLAGS                                     #
+###############################################################################
+IF (MSVC)
+		TARGET_COMPILE_OPTIONS (BM_sinecrunch PRIVATE )
+	ELSE ()
+		TARGET_COMPILE_OPTIONS (BM_sinecrunch PRIVATE -Wall -Wextra -Werror -Wpedantic)
+ENDIF ()

@@ -3,4 +3,4 @@
 	url = https://github.com/google/benchmark.git
 [submodule "benchmark/libs/FastTrigo"]
 	path = benchmark/libs/FastTrigo
-	url = https://github.com/MuAlphaOmegaEpsilon/FastTrigo/
+	url = https://github.com/MuAlphaOmegaEpsilon/FastTrigo.git
