@@ -117,11 +117,8 @@ const auto SIN_ ## type ## _ ## name = benchSinusoid <type, function>;  \
 BENCHMARK (SIN_ ## type ## _ ## name);
 
 // Register all the standard functions to benchmark.
-BENCH_SINUSOID (floatQP, std::sin, std)
 BENCH_SINUSOID (floatQP, sinl, compiler)
-BENCH_SINUSOID (floatDP, std::sin, std)
 BENCH_SINUSOID (floatDP, sin, compiler)
-BENCH_SINUSOID (floatSP, std::sin, std)
 BENCH_SINUSOID (floatSP, sinf, compiler)
 
 // Register FastTrigo functions to benchmark.
