@@ -61,15 +61,15 @@ void initialize ()
 }
 
 template <typename T> constexpr
-floatDP error_abs (const T& value, const floatQP& groundTruth) noexcept
+floatDP error_abs (const T& value, const floatQP& reference) noexcept
 {
-    return (floatDP) abs ((value - (T) groundTruth));
+    return (floatDP) abs ((value - (T) reference));
 }
 
 template <typename T> constexpr
-floatDP error_rel (const T& value, const floatQP& groundTruth) noexcept
+floatDP error_rel (const T& value, const floatQP& reference) noexcept
 {
-    return (floatDP) abs (value / (T) groundTruth - (T) 1.0L);
+    return (floatDP) abs (value / (T) reference - (T) 1.0L);
 }
 
 template <typename T, T (*sinusoid)(T)>
