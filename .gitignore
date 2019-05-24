@@ -9,5 +9,6 @@
 !/CMakeLists.txt
 !/LICENSE
 !/README.md
+!/sinecrunch.hpp
 !/.gitignore
 !/.travis.yml
