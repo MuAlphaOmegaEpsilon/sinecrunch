@@ -1,2 +1,10 @@
-# Ignore bin folder
-/bin
+# Ignore both root files and root directories...
+/*
+
+# ...except these files down here...
+!/BM_sinecrunch.cpp
+!/build.sh
+!/CMakeLists.txt
+!/run.sh
+!/setup.sh
+!/.gitignore
