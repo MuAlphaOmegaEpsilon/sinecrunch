@@ -117,21 +117,21 @@ const auto SIN_ ## type ## _ ## name = benchSinusoid <type, function>;  \
 BENCHMARK (SIN_ ## type ## _ ## name);
 
 // Register all the standard functions to benchmark.
-BENCH_SINUSOID (floatQP, std::sin, std);
-BENCH_SINUSOID (floatQP, sinl, compiler);
-BENCH_SINUSOID (floatDP, std::sin, std);
-BENCH_SINUSOID (floatDP, sin, compiler);
-BENCH_SINUSOID (floatSP, std::sin, std);
-BENCH_SINUSOID (floatSP, sinf, compiler);
+BENCH_SINUSOID (floatQP, std::sin, std)
+BENCH_SINUSOID (floatQP, sinl, compiler)
+BENCH_SINUSOID (floatDP, std::sin, std)
+BENCH_SINUSOID (floatDP, sin, compiler)
+BENCH_SINUSOID (floatSP, std::sin, std)
+BENCH_SINUSOID (floatSP, sinf, compiler)
 
 // Register FastTrigo functions to benchmark.
 #include <fasttrigo.h>
-BENCH_SINUSOID (floatSP, FT::sin, fasttrigo_fast);
-BENCH_SINUSOID (floatSP, FTA::sin, fasttrigo_precise);
+BENCH_SINUSOID (floatSP, FT::sin, fasttrigo_fast)
+BENCH_SINUSOID (floatSP, FTA::sin, fasttrigo_precise)
 
 // Register sinecrunch functions to benchmark.
 #include <sinecrunch.hpp>
-BENCH_SINUSOID (floatSP, sinecrunch::sin<1>, sinecrunch);
+BENCH_SINUSOID (floatSP, sinecrunch::sin<1>, sinecrunch)
 
 int main(int argc, char** argv) 
 {
