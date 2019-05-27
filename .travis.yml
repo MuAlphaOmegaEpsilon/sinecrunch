@@ -5,6 +5,7 @@ matrix:
 
     - os: windows
       compiler: clang++
+      generator: "MinGW Makefiles"
       env:
       - CC="/c/Program Files/LLVM/bin/clang"
       - CXX="/c/Program Files/LLVM/bin/clang++"
