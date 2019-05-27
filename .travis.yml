@@ -3,18 +3,13 @@ language: cpp
 matrix:
   include:
 
-    # - os: linux
-    #   compiler: clang        
-
-    # - os: linux
-    #   compiler: g++
-
-    # - os: osx
-
     - os: windows
+      compiler: clang++
       env:
       - CC="/c/Program Files/LLVM/bin/clang"
       - CXX="/c/Program Files/LLVM/bin/clang++"
+      - CC_FOR_BUILD="/c/Program Files/LLVM/bin/clang"
+      - CXX_FOR_BUILD="/c/Program Files/LLVM/bin/clang++"
 
 script:
   - ./benchmark/setup.sh
