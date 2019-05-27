@@ -4,14 +4,16 @@ matrix:
   include:
 
     - os: linux
-      compiler: clang        
-
-    - os: linux
-      compiler: g++
+      compiler: 
+        - clang        
+        - g++
 
     - os: osx
 
     - os: windows
+      compiler: 
+        - msvc
+        - clang
 
 script:
   - ./benchmark/setup.sh
