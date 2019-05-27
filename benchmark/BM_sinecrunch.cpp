@@ -63,15 +63,15 @@ void initialize ()
 }
 
 template <typename T> constexpr
-floatDP error_abs (const T& value, const floatQP& reference) noexcept
+floatDP error_abs (const T& val, const floatQP& ref) noexcept
 {
-    return (floatDP) fabs ((value - (T) reference));
+    return fabs (static_cast <floatDP> (val - static_cast <T> (ref)));
 }
 
 template <typename T> constexpr
-floatDP error_rel (const T& value, const floatQP& reference) noexcept
+floatDP error_rel (const T& val, const floatQP& ref) noexcept
 {
-    return (floatDP) fabs (value / (T) reference - (T) 1.0L);
+    return fabs (1.0 - static_cast <floatDP> (val / static_cast <T> (ref)));
 }
 
 template <typename T, T (*sinusoid)(T)>
