@@ -76,8 +76,8 @@ TARGET_LINK_LIBRARIES (BM_sinecrunch benchmark)
 ###############################################################################
 #                                   FLAGS                                     #
 ###############################################################################
-#IF (MSVC)
+IF (NOT MSVC)
 #		TARGET_COMPILE_OPTIONS (BM_sinecrunch PRIVATE /Wall /WX /sdl)
 #	ELSE ()
 		TARGET_COMPILE_OPTIONS (BM_sinecrunch PRIVATE -Wall -Wextra -Werror -Wpedantic -msse3) #-Wconversion -Wcast-align -Wunused -Wshadow -Wpointer-arith -Wcast-qual -Wno-missing-braces)
-#ENDIF ()
+ENDIF ()
