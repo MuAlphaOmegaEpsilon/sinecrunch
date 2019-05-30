@@ -92,8 +92,8 @@ static void benchSinusoid (benchmark::State& state)
 
     // Total number of items processed. 
     // Google Benchmark will calculate how many items_per_second based on this.
-    state.SetItemsProcessed (state.iterations ());
-    state.SetBytesProcessed (state.iterations () * sizeof (T));
+    state.SetItemsProcessed (static_cast <int64_t> (state.iterations ()));
+    state.SetBytesProcessed (static_cast <int64_t> (state.iterations () * sizeof (T)));
 
     state.counters["angle"] = random;
 
