@@ -86,7 +86,9 @@ static void benchSinusoid (benchmark::State& state)
     // Main funciton benchmark loop: this is where the execution of the 
     // function is actually measured.
     for (const auto _ : state) 
+    {
         benchmark::DoNotOptimize (result[0] = static_cast <double> (sinusoid (random));
+    }
     
     std::transform (RANGE (angles), result, sinusoid);
 
