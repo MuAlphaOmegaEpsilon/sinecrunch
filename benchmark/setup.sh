@@ -1,13 +1,14 @@
 #!/bin/sh
 set -euf
 
-# Navigate to the benchmark folder
+### NAVIGATE TO THE TESTS FOLDER ###
 cd "$(dirname "$0")"
 
 ### COLORING SCHEME ###
 ORANGE=$(tput setaf 3)
 NOCOLOR=$(tput sgr0)
 
+### SCRIPT CORE ###
 printf "%sDOWNLOADING SUBMODULES%s\\n" "${ORANGE}" "${NOCOLOR}"
 git submodule update --init --recursive
 
