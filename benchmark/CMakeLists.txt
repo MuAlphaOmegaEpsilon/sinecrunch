@@ -1,7 +1,7 @@
 ###############################################################################
 #                                CMAKE VERSION                                #
 ###############################################################################
-CMAKE_MINIMUM_REQUIRED (VERSION 3.9.2)
+CMAKE_MINIMUM_REQUIRED (VERSION 3.11.4)
 
 
 
@@ -18,13 +18,13 @@ PROJECT (BM_sinecrunch
 
 
 ###############################################################################
-#                       GOOGLE BENCMHMARK VAR OVERRIDES                       #
+#                                 EXECUTABLE                                  #
 ###############################################################################
-SET (BENCHMARK_DOWNLOAD_DEPENDENCIES ON CACHE BOOL "Enable dependencies download" FORCE)
-SET (BENCHMARK_ENABLE_GTEST_TESTS OFF CACHE BOOL "Disabling Google Benchmark's GTest tests" FORCE)
-SET (BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Suppressing Google Benchmark's tests" FORCE)
-SET (BENCHMARK_ENABLE_EXCEPTIONS OFF CACHE BOOL "Suppressing Google Benchmark's exceptions" FORCE)
-SET (BENCHMARK_ENABLE_INSTALL OFF CACHE BOOL "Disabling Google Benchmark's installation" FORCE)
+ADD_EXECUTABLE (BM_sinecrunch "${CMAKE_CURRENT_SOURCE_DIR}/BM_sinecrunch.cpp")
+SET_TARGET_PROPERTIES (BM_sinecrunch PROPERTIES 
+										CXX_STANDARD 11 
+										CXX_STANDARD_REQUIRED YES 
+										CXX_EXTENSIONS OFF)
 
 
 
@@ -33,16 +33,6 @@ SET (BENCHMARK_ENABLE_INSTALL OFF CACHE BOOL "Disabling Google Benchmark's insta
 #                             CMAKE DEPENDENCIES                              #
 ###############################################################################
 ADD_SUBDIRECTORY (${CMAKE_CURRENT_LIST_DIR}/.. ${CMAKE_CURRENT_LIST_DIR}/sinecrunch)
-ADD_SUBDIRECTORY (libs/benchmark)
-
-
-
-
-###############################################################################
-#                                 EXECUTABLE                                  #
-###############################################################################
-ADD_EXECUTABLE (BM_sinecrunch "${CMAKE_CURRENT_SOURCE_DIR}/BM_sinecrunch.cpp")
-SET_TARGET_PROPERTIES (BM_sinecrunch PROPERTIES CXX_STANDARD 11 CXX_EXTENSIONS OFF)
 
 
 
@@ -50,8 +40,8 @@ SET_TARGET_PROPERTIES (BM_sinecrunch PROPERTIES CXX_STANDARD 11 CXX_EXTENSIONS O
 ###############################################################################
 #                                  HEADERS                                    #
 ###############################################################################
-TARGET_INCLUDE_DIRECTORIES (BM_sinecrunch PRIVATE ${CMAKE_CURRENT_LIST_DIR}/libs/benchmark/include)
 TARGET_INCLUDE_DIRECTORIES (BM_sinecrunch PRIVATE ${CMAKE_CURRENT_LIST_DIR}/libs/FastTrigo)
+TARGET_INCLUDE_DIRECTORIES (BM_sinecrunch PRIVATE ${CMAKE_CURRENT_LIST_DIR}/libs/sltbench/include)
 
 
 
@@ -59,7 +49,10 @@ TARGET_INCLUDE_DIRECTORIES (BM_sinecrunch PRIVATE ${CMAKE_CURRENT_LIST_DIR}/libs
 ###############################################################################
 #                                  SOURCES                                    #
 ###############################################################################
+file (GLOB sltbench_SRC "${CMAKE_CURRENT_LIST_DIR}/libs/sltbench/src/*.cpp")
+TARGET_SOURCES (BM_sinecrunch PRIVATE ${sltbench_SRC})
 TARGET_SOURCES (BM_sinecrunch PRIVATE ${CMAKE_CURRENT_LIST_DIR}/libs/FastTrigo/fasttrigo.cpp)
+
 
 
 
@@ -68,7 +61,6 @@ TARGET_SOURCES (BM_sinecrunch PRIVATE ${CMAKE_CURRENT_LIST_DIR}/libs/FastTrigo/f
 #                                  LINKING                                    #
 ###############################################################################
 TARGET_LINK_LIBRARIES (BM_sinecrunch sinecrunch)
-TARGET_LINK_LIBRARIES (BM_sinecrunch benchmark)
 
 
 
@@ -79,5 +71,5 @@ TARGET_LINK_LIBRARIES (BM_sinecrunch benchmark)
 IF (MSVC)
 		TARGET_COMPILE_OPTIONS (BM_sinecrunch PRIVATE /Wall /WX /sdl)
 	ELSE ()
-		TARGET_COMPILE_OPTIONS (BM_sinecrunch PRIVATE -Wall -Wextra -Werror -Wpedantic -msse3) #-Wconversion -Wcast-align -Wunused -Wshadow -Wpointer-arith -Wcast-qual -Wno-missing-braces)
+		TARGET_COMPILE_OPTIONS (BM_sinecrunch PRIVATE -Wall -Wextra -Werror -Wpedantic) #-Wconversion -Wcast-align -Wunused -Wshadow -Wpointer-arith -Wcast-qual -Wno-missing-braces)
 ENDIF ()

@@ -1,5 +1,6 @@
-#include <benchmark/benchmark.h>
+#include <sltbench/Bench.h>
 
+#include <algorithm>
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <numeric>
@@ -75,39 +76,39 @@ floatDP error_rel (const T& val, const floatQP& ref) noexcept
 }
 
 template <typename T, T (*sinusoid)(T)>
-static void benchSinusoid (benchmark::State& state)
+static void benchSinusoid ()
 {
-    const T* angles = getAngles <T> ();
-    T result [samplesNum];
-    floatDP errors [samplesNum];
+    // const T* angles = getAngles <T> ();
+    // T result [samplesNum];
+    // floatDP errors [samplesNum];
 
-    double random = fmod (rand () / 1000.0, 2.0 * M_PI);
+    // double random = fmod (rand () / 1000.0, 2.0 * M_PI);
     
-    // Main funciton benchmark loop: this is where the execution of the 
-    // function is actually measured.
-    for (const auto _ : state) 
-        benchmark::DoNotOptimize (result[0] = sinusoid (random));
+    // // Main funciton benchmark loop: this is where the execution of the 
+    // // function is actually measured.
+    // for (const auto _ : state) 
+    //     benchmark::DoNotOptimize (result[0] = sinusoid (random));
     
-    std::transform (RANGE (angles), result, sinusoid);
+    // std::transform (RANGE (angles), result, sinusoid);
 
-    // Total number of items processed. 
-    // Google Benchmark will calculate how many items_per_second based on this.
-    state.SetItemsProcessed (state.iterations ());
-    state.SetBytesProcessed (state.iterations () * sizeof (T));
+    // // Total number of items processed. 
+    // // Google Benchmark will calculate how many items_per_second based on this.
+    // state.SetItemsProcessed (state.iterations ());
+    // state.SetBytesProcessed (state.iterations () * sizeof (T));
 
-    state.counters["angle"] = random;
+    // state.counters["angle"] = random;
 
-    // Absolute errors calculations
-    std::transform (RANGE (result), groundTruth, errors, error_abs <T>);
-    state.counters["AErr_avg"] = std::accumulate (RANGE (errors), 0.0L) * samplePeriod;
-    state.counters["AErr_max"] = *std::max_element (RANGE (errors));
-    state.counters["AErr_min"] = *std::min_element (RANGE (errors));
+    // // Absolute errors calculations
+    // std::transform (RANGE (result), groundTruth, errors, error_abs <T>);
+    // state.counters["AErr_avg"] = std::accumulate (RANGE (errors), 0.0L) * samplePeriod;
+    // state.counters["AErr_max"] = *std::max_element (RANGE (errors));
+    // state.counters["AErr_min"] = *std::min_element (RANGE (errors));
 
-    // Relative errors calculations
-    std::transform (RANGE (result), groundTruth, errors, error_rel <T>);
-    state.counters["RE_avg"] = std::accumulate (RANGE (errors), 0.0L) * samplePeriod;
-    state.counters["RE_max"] = *std::max_element (RANGE (errors));
-    state.counters["RE_min"] = *std::min_element (RANGE (errors));
+    // // Relative errors calculations
+    // std::transform (RANGE (result), groundTruth, errors, error_rel <T>);
+    // state.counters["RE_avg"] = std::accumulate (RANGE (errors), 0.0L) * samplePeriod;
+    // state.counters["RE_max"] = *std::max_element (RANGE (errors));
+    // state.counters["RE_min"] = *std::min_element (RANGE (errors));
 }
 
 // A little shorthand to mark a function for benchmarking and to rename it.
@@ -116,7 +117,7 @@ static void benchSinusoid (benchmark::State& state)
 // Name defines under which tag the function should appear in the results.
 #define BENCH_SINUSOID(type, function, name)                            \
 const auto SIN_ ## type ## _ ## name = benchSinusoid <type, function>;  \
-BENCHMARK (SIN_ ## type ## _ ## name);
+SLTBENCH_FUNCTION (SIN_ ## type ## _ ## name)
 
 // Register all the standard functions to benchmark.
 BENCH_SINUSOID (floatQP, sinl, compiler)
@@ -132,12 +133,11 @@ BENCH_SINUSOID (floatSP, FTA::sin, fasttrigo_precise)
 #include <sinecrunch.hpp>
 BENCH_SINUSOID (floatSP, sinecrunch::sin<1>, sinecrunch)
 
+
+
 int main(int argc, char** argv) 
 {
-    benchmark::Initialize (&argc, argv);
-    if (benchmark::ReportUnrecognizedArguments (argc, argv)) 
-        return 1;
-
     initialize ();
-    benchmark::RunSpecifiedBenchmarks ();
+
+    return sltbench::Main(argc, argv);
 }  
